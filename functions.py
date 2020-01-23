@@ -1,14 +1,8 @@
 ######## Imports ########
 from github import Github
 import os
+import time
 ######## Imports ########
-
-
-# def _initiate_github_instance(access_token):
-# 	return Github(access_token)
-
-# def _get_github_user(github_instance):
-# 	return github_instance.get_user()
 
 def _create_repo_with_all_properties(user,repo_name,repo_description,auto_init_bool,private_bool):
 	try:
@@ -32,4 +26,6 @@ def _clone_repo_to_project_folder(repo_object, project_folder,language):
 
 	except Exception as e:
 		print(str(e))
-		return False
+		time.sleep(4.2)
+		exit()
+		
