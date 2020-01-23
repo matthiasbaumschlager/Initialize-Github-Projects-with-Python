@@ -18,12 +18,15 @@ def _create_repo_with_all_properties(user,repo_name,repo_description,auto_init_b
 
 def _clone_repo_to_project_folder(repo_object, project_folder,language):
 	try:
+		clone_path=os.path.join(project_folder,language)
 		if repo_object.ssh_url is None:
 			raise Exception("There is no GitHub ssh repository URL!")
+		if os.path.isdir(clone_path):
+			raise Exception("The repository is already cloned to the selected destination!")
 
 		# unfortunately there is no way (yet) to clone with pygithub
 		clone="git clone {}".format(repo_object.ssh_url)
-		os.chdir(os.path.join(project_folder,language))  # Specifying the path where the cloned project needs to be copied
+		os.chdir(clone_path) # Specifying the path where the cloned project needs to be copied
 		os.system(clone)  # Cloning
 		return True
 
