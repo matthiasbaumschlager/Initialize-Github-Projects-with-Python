@@ -4,11 +4,10 @@ import os
 ######## Imports ########
 
 
-def _initiate_github_instance(username, password):
-	return Github(username,password)
-	
+def _initiate_github_instance(access_token):
+	return Github(access_token)
 
-def _create_github_user(github_instance):
+def _get_github_user(github_instance):
 	return github_instance.get_user()
 
 def _get_clone_url(repo_object):
@@ -19,7 +18,13 @@ def _create_repo_with_all_properties(user,repo_name,repo_description,auto_init_b
 
 def _clone_repo_to_project_folder(repo_object, project_folder):
 	try:
-		os.mkdir(os.path.join(project_folder,repo_object.name))
-		return true
-	except:
-		print("The repository could not be cloned to your selected Project-Folder!")
+		if repo_object.ssh_url is None:
+			raise Exception("There is no GitHub ssh repository URL!")
+		# unfortunately there is no way (yet) to clone with pygithub
+        clone = "git clone {}".format(repo_object.ssh_url)
+        os.chdir(project_folder)  # Specifying the path where the cloned project needs to be copied
+        os.system(clone)  # Cloning
+		return True
+	except Exception as e:
+		logger.warning(e)
+		return False
