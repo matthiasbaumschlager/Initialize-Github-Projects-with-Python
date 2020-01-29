@@ -34,7 +34,7 @@ def _clone_repo_to_project_folder(repo_object, clone_folder):
 	try:
 		if repo_object.ssh_url is None:
 			raise Exception("There is no GitHub ssh repository URL!")
-		if os.path.isdir(clone_folder):
+		if os.path.isdir(os.path.join(clone_folder,repo_object.name)):
 			raise Exception("The repository is already cloned to the selected destination!")
 
 		# unfortunately there is no way (yet) to clone with pygithub

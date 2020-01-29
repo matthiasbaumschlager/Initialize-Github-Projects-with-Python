@@ -70,10 +70,6 @@ class Script:
 		answers=prompt(questions, style=Config.style)
 
 
-		##Break the back-end for now!
-		#exit()
-
-
 		# Backend - doing all the work after (correct) user input.
 		self.user = Github(Config.Username, Config.Password).get_user()
 
@@ -82,7 +78,6 @@ class Script:
 				if(repo.name==answers["repo_name"]):
 					raise Exception("This repository already exists!")
 			self.repo = Functions._create_repo_with_all_properties(self.user, answers["repo_name"], answers["repo_description"], answers["auto_init"], answers["private_repo"])
-			print(self.repo.name)
 		except Exception as e:
 			print(str(e))
 			time.sleep(4.2)
@@ -91,8 +86,8 @@ class Script:
 
 		if type(self.repo) != bool:
 			if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers["project_folder"],answers["language"]))):
-				print("""Your new GitHub-Project was successfully created and was cloned to your desired project-folder!
-					Enjoy your work :)""")
+				print("Your new GitHub-Project was successfully created and was cloned to your desired project-folder!")
+				print("Enjoy your work :)")
 				time.sleep(4.2)
 
 
