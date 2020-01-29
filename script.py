@@ -1,8 +1,13 @@
 ######## Imports ########
 #Packages
+##for back-end
 import os
 import time
 from github import Github
+##for front-end
+from pyfiglet import Figlet
+from PyInquirer import style_from_dict, Token, prompt
+from PyInquirer import Validator, ValidationError
 #Other files
 import functions as Functions
 from config import Variables as Config
@@ -10,11 +15,62 @@ from config import Variables as Config
 
 class Script:
 	def __init__(self):
-		# repo_name = "Test-Repository-matthiasbaumschlager"
-		# repo_description = "Sth worse than the solution 42."
-		# auto_init = True
-		# private_repo = True
-		# selected_language="Python"
+
+		### User-Input Section ###
+		greeting = Figlet(font="slant")
+		print(greeting.renderText("New Project"))
+
+		questions = [
+		{
+			"type": "input",
+			"name": "repo_name",
+			"message": "What is the name for your new Repository?",
+			"validate": Functions.Repo_name_not_empty
+
+		},
+		{
+			"type": "input",
+			"name": "repo_description",
+			"message": "Please type in a suitable description for your new Project here:",
+			"validate": Functions.Repo_description_not_empty
+
+		},
+		{
+			"type": "confirm",
+			"name": "auto_init",
+			"message": "Do you want to auto-init your Repository (includes ReadMe-File)",
+			"default": False
+
+		},
+		{
+			"type": "confirm",
+			"name": "private_repo",
+			"message": "Do you want your Repository to be private?",
+			"default": True
+
+		},
+		{
+			"type": "list",
+			"name": "project_folder",
+			"message": "In which project-folder do you want to clone your new repository?",
+			"choices": Config.List_Projects_folders,
+			"default": Config.List_Projects_folders[0]
+		},
+		{
+			"type": "list",
+			"name": "language",
+			"message": "Please select the Programming-Language for your new project.",
+			"choices": Config.List_Languages
+		}]
+		### User-Input Section ###
+
+
+
+
+		##Break the back-end for now!
+		exit()
+
+
 
 		self.user=None
 		self.repo=None
