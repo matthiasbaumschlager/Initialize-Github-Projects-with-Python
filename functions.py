@@ -13,20 +13,13 @@ from PyInquirer import Validator, ValidationError
 #Configuring the validators for all questions
 class Repo_name_not_empty(Validator):
 	def validate(self, document):
-		if(document.text == "" || document.text == None || document.text == " "):
+		if(document.text == "" or document.text == None or document.text == " "):
 			raise ValidationError(message="Please enter a valid name for your new Repository!")
 
 class Repo_description_not_empty(Validator):
 	def validate(self, document):
-		if(document.text == "" || document.text == None || document.text == " "):
+		if(document.text == "" or document.text == None or document.text == " "):
 			raise ValidationError(message="Please enter a valid description for your new Repository!")
-
-
-
-
-
-
-
 
 
 
@@ -37,17 +30,16 @@ def _create_repo_with_all_properties(user,repo_name,repo_description,auto_init_b
 	except:
 		return False
 
-def _clone_repo_to_project_folder(repo_object, project_folder,language):
+def _clone_repo_to_project_folder(repo_object, clone_folder):
 	try:
-		clone_path=os.path.join(project_folder,language)
 		if repo_object.ssh_url is None:
 			raise Exception("There is no GitHub ssh repository URL!")
-		if os.path.isdir(clone_path):
+		if os.path.isdir(clone_folder):
 			raise Exception("The repository is already cloned to the selected destination!")
 
 		# unfortunately there is no way (yet) to clone with pygithub
 		clone="git clone {}".format(repo_object.ssh_url)
-		os.chdir(clone_path) # Specifying the path where the cloned project needs to be copied
+		os.chdir(clone_folder) # Specifying the path where the cloned project needs to be copied
 		os.system(clone)  # Cloning
 		return True
 

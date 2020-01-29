@@ -16,6 +16,9 @@ from config import Variables as Config
 class Script:
 	def __init__(self):
 
+		self.user=None
+		self.repo=None
+
 		### User-Input Section ###
 		greeting = Figlet(font="slant")
 		print(greeting.renderText("New Project"))
@@ -68,12 +71,7 @@ class Script:
 
 
 		##Break the back-end for now!
-		exit()
-
-
-
-		self.user=None
-		self.repo=None
+		#exit()
 
 
 		# Backend - doing all the work after (correct) user input.
@@ -81,9 +79,9 @@ class Script:
 
 		try: 
 			for repo in self.user.get_repos():
-				if(repo.name==repo_name):
+				if(repo.name==answers["repo_name"]):
 					raise Exception("This repository already exists!")
-			self.repo = Functions._create_repo_with_all_properties(self.user, answers.repo_name, answers.repo_description, answers.auto_init, answers.private_repo)
+			self.repo = Functions._create_repo_with_all_properties(self.user, answers["repo_name"], answers["repo_description"], answers["auto_init"], answers["private_repo"])
 			print(self.repo.name)
 		except Exception as e:
 			print(str(e))
@@ -92,7 +90,7 @@ class Script:
 		
 
 		if type(self.repo) != bool:
-			if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers.project_folder,answers.language))):
+			if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers["project_folder"],answers["language"]))):
 				print("""Your new GitHub-Project was successfully created and was cloned to your desired project-folder!
 					Enjoy your work :)""")
 				time.sleep(4.2)

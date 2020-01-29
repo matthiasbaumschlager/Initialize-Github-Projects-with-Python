@@ -1,14 +1,15 @@
 ### Imports ###
-from PyInquirer import style_from_dict
+from PyInquirer import style_from_dict, Token, prompt
+### Imports ###
 
 class Variables:
 	##Project-Folders
 	Contribution_projects_folder="/home/matthias/My Files/02 Contribution/Freelance/Coding/"
 	Learning_projects_folder="/home/matthias/My Files/04 Growth/Learning/Coding/"
-	List_Lrojects_folders=[Learning_projects_folder,Contribution_projects_folder]
+	List_Projects_folders=[Learning_projects_folder,Contribution_projects_folder]
 
 	##Languages
-	List_Languages =["LaTex","Python"]
+	List_Languages =["LaTex","Python", "C#"]
 
 
 	# Github Login - Data
