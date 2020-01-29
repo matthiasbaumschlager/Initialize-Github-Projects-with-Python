@@ -64,7 +64,7 @@ class Script:
 		}]
 		### User-Input Section ###
 
-
+		answers=prompt(questions, style=Config.style)
 
 
 		##Break the back-end for now!
@@ -83,7 +83,7 @@ class Script:
 			for repo in self.user.get_repos():
 				if(repo.name==repo_name):
 					raise Exception("This repository already exists!")
-			self.repo = Functions._create_repo_with_all_properties(self.user, repo_name, repo_description, auto_init, private_repo)
+			self.repo = Functions._create_repo_with_all_properties(self.user, answers.repo_name, answers.repo_description, answers.auto_init, answers.private_repo)
 			print(self.repo.name)
 		except Exception as e:
 			print(str(e))
@@ -92,8 +92,8 @@ class Script:
 		
 
 		if type(self.repo) != bool:
-			if(Functions._clone_repo_to_project_folder(self.repo, Config.Learning_projects_folder, selected_language)):
-				print("""Your new GitHub-Project was successfully created and is already cloned to your desired project-folder!
+			if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers.project_folder,answers.language))):
+				print("""Your new GitHub-Project was successfully created and was cloned to your desired project-folder!
 					Enjoy your work :)""")
 				time.sleep(4.2)
 
