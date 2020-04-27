@@ -30,6 +30,7 @@ def _create_repo_with_all_properties(user,repo_name,repo_description,auto_init_b
 	except:
 		return False
 
+
 def _clone_repo_to_project_folder(repo_object, clone_folder):
 	try:
 		if repo_object.ssh_url is None:
