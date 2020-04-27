@@ -72,13 +72,15 @@ class Script:
         }]
         ### User-Input Section ###
         language_answer=prompt(language_question, style=Config.style)
+        folder_name = None
+        language_folder = language_answer["language"]
         if(language_answer["language"]=="New Folder"):
             folder_name = input("Please type a name for your new folder:")
             os.mkdir(os.path.join(answers_without_languages["project_folder"],folder_name))
+            language_folder=folder_name
 
         # Backend - doing all the work after (correct) user input.
         self.user = Github(Config.Username, Config.Password).get_user()
-
         try:
             for repo in self.user.get_repos():
                 if(repo.name==answers_without_languages["repo_name"]):
@@ -91,7 +93,7 @@ class Script:
 
 
         if type(self.repo) != bool:
-            if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers_without_languages["project_folder"],language_answer["language"]))):
+            if(Functions._clone_repo_to_project_folder(self.repo, os.path.join(answers_without_languages["project_folder"],language_folder))):
                 print("Your new GitHub-Project was successfully created and was cloned to your desired project-folder!")
                 print("Enjoy your work :)")
                 time.sleep(4.2)
