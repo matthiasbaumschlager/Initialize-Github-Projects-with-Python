@@ -75,13 +75,6 @@ class Script:
         if(language_answer["language"]=="New Folder"):
             folder_name = input("Please type a name for your new folder:")
             os.mkdir(os.path.join(answers_without_languages["project_folder"],folder_name))
-            ####
-            if(answers_without_languages["project_folder"]==Config.Learning_projects_folder):
-                language_choices=Functions._get_folders_from_project_folder(Config.Learning_projects_folder)
-            else:
-                language_choices=Functions._get_folders_from_project_folder(Config.Contribution_projects_folder)
-            ####
-            language_answer=prompt(language_question, style=Config.style)
 
         # Backend - doing all the work after (correct) user input.
         self.user = Github(Config.Username, Config.Password).get_user()
