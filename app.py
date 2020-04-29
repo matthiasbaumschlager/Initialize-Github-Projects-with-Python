@@ -80,7 +80,7 @@ class Script:
             language_folder=folder_name
 
         # Backend - doing all the work after (correct) user input.
-        self.user = Github(Config.Username, Config.Password).get_user()
+        self.user = Github(Config.Access_Token).get_user()
         try:
             for repo in self.user.get_repos():
                 if(repo.name==answers_without_languages["repo_name"]):

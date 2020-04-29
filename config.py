@@ -15,9 +15,7 @@ class Variables:
 
     ##Languages
     # Github Login - Data
-    Access_Token="66b610dc8cdd435aa97041a2aa2921e9e3703326"
-    Username = "matthiasbaumschlager"
-    Password = "8X3KaBFwAyFh"
+    Access_Token="ca168ed6f6d988597fbf66f6c6b3c2aaabe7e525"
 
     #Pre-config for question-style
     style = style_from_dict({
